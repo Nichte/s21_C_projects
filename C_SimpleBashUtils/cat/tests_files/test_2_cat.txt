@@ -1,0 +1,14 @@
+void find_match_pattern(int i, int *min_rm_so, int *match_len, int *index,
+                        regmatch_t pmatch) {
+  if (*min_rm_so > pmatch.rm_so) {
+    *min_rm_so = pmatch.rm_so;
+    *match_len = pmatch.rm_eo - pmatch.rm_so;
+    *index = i;
+  }
+  if ((*min_rm_so == pmatch.rm_so) &&
+      (*match_len < pmatch.rm_eo - pmatch.rm_so)) {
+    *min_rm_so = pmatch.rm_so;
+    *match_len = pmatch.rm_eo - pmatch.rm_so;
+    *index = i;
+  }
+}
